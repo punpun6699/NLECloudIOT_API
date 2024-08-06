@@ -11,7 +11,7 @@ def callapi():
     in2=ui.textEdit_2.document().toPlainText()
     urlin="http://api.nlecloud.com/devices/"+in1+"/sensors/"+in2
     print(urlin)
-    url = urlin #"http://api.nlecloud.com/devices/1051161/sensors/hfghfg"
+    url = urlin
     with open('AccessToken.txt', 'r') as file:
         content = file.read()
         print(content)

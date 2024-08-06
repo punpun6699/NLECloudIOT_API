@@ -1,7 +1,5 @@
 #import library
 import sys
-import threading
-from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from UI import AccessToken_UI
 

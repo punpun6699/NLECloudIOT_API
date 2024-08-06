@@ -9,7 +9,7 @@ def callapi():
     # URL และโทเค็นการเข้าถึง
     urlin = ui.textEdit.document().toPlainText()
     print(urlin)
-    url = urlin #"http://api.nlecloud.com/devices/1051161/sensors/hfghfg"
+    url = urlin
     with open('AccessToken.txt', 'r') as file:
         content = file.read()
         print(content)
