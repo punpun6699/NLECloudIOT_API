@@ -1,7 +1,7 @@
 #import library
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from UI import AccessToken_UI
+from code_1.UI import AccessToken_UI
 
 def clscclack():
     ui.textEdit.setText("")

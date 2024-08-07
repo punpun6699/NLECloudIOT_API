@@ -3,7 +3,7 @@ import urllib3
 import subprocess
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from UI import API_Main_UI
+from code_1.UI import API_Main_UI
 def callapi():
     urllib3.disable_warnings(urllib3.exceptions.NotOpenSSLWarning)
     # URL และโทเค็นการเข้าถึง
@@ -37,7 +37,6 @@ def callapi():
             # Append the final substring after the last comma
         print(datanew[q:])
         substrings.append(datanew[q:])
-
         # Join substrings with new lines
         result_str = "\n".join(substrings)
 
