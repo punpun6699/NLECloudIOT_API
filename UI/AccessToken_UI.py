@@ -35,13 +35,17 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+
+
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "AccessToken Setting"))
         self.label.setText(_translate("Dialog", "Access you Token"))
         self.pushButton.setText(_translate("Dialog", "cls"))
-        self.pushButton_2.setText(_translate("Dialog", "can"))
+        self.pushButton_2.setText(_translate("Dialog", "cancel"))
         self.pushButton_3.setText(_translate("Dialog", "Save"))
+
 
 
 if __name__ == "__main__":

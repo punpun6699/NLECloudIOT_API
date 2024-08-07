@@ -81,4 +81,4 @@ if __name__ == '__main__':
     ui.pushButton_3.clicked.connect(apisetClick)
 
 
-    sys.exit(app.exec_())  # Start the event loop and exit the application when done
+    sys.exit(app.exec_())  # Start th  e event loop and exit the application when done
