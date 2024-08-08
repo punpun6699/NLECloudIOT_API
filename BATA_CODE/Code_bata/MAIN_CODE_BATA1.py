@@ -36,15 +36,15 @@ def callapi(excelcom):
         datanew = str(data)
         substrings = datanew.split(',')
 
-        datalo = []
-        for substring in substrings:
-            parts = substring.split("'")
-            if len(parts) > 1:
-                datalo.append(parts[1])
+
         if excelcom==1:
             nameindex1 = 0
             nameindex2 = 0
-
+            datalo = []
+            for substring in substrings:
+                parts = substring.split("'")
+                if len(parts) > 1:
+                    datalo.append(parts[1])
             if "Name" in datalo:
                 nameindex1 = datalo.index("Name")
                 print(datalo[nameindex1], "=", substrings[nameindex1])
@@ -52,14 +52,14 @@ def callapi(excelcom):
                 nameindex2 = datalo.index("Value")
                 print(datalo[nameindex2], "=", substrings[nameindex2])
 
-        # สร้าง DataFrame ใหม่ที่มีข้อมูลใหม่
+            # สร้าง DataFrame ใหม่ที่มีข้อมูลใหม่
             new_row = {'Column1': substrings[nameindex1], 'Column2': substrings[nameindex2]}
             new_df = pd.DataFrame([new_row])
 
-        # รวม DataFrame ใหม่กับ DataFrame ที่มีอยู่
+            # รวม DataFrame ใหม่กับ DataFrame ที่มีอยู่
             df = pd.concat([df, new_df], ignore_index=True)
 
-        # บันทึก DataFrame ที่อัปเดตกลับไปที่ไฟล์ Excel
+            # บันทึก DataFrame ที่อัปเดตกลับไปที่ไฟล์ Excel
             df.to_excel(file_path, index=False, engine='openpyxl')
             print(f"\033[1;32;40mExcel Update\033[0m")
         else:
