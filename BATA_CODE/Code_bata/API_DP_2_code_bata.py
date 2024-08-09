@@ -105,8 +105,8 @@ def callapi(excelcom): # Function to call an API and handle Excel operations bas
                 print(f"\033[1;31;40mExcel can't Update\033[0m")  # Log an error message
         else:
             print(f"\033[1;31;40mExcel not Update\033[0m")  # Log a message indicating no update occurred
-            result_str = "\n".join(substrings)  # Join the substrings with new lines
-            ui.label.setText(result_str)  # Display the result in the UI label
+        result_str = "\n".join(substrings)  # Join the substrings with new lines
+        ui.label.setText(result_str)  # Display the result in the UI label
     else:
         logtxt = f"Error: {response.status_code}, \n {response.text}"  # Log the error
         print(logtxt)

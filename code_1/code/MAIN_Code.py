@@ -6,7 +6,6 @@ import sys  # System-specific parameters and functions
 from PyQt5.QtWidgets import QApplication, QMainWindow  # UI components for creating application windows and widgets
 from code_1.UI import API_Main_UI  # Import the custom user interface (UI)
 
-
 def callapi():  # Function to call an API
     urllib3.disable_warnings(urllib3.exceptions.NotOpenSSLWarning)  # Disable warnings related to SSL/TLS not using OpenSSL
 
@@ -31,23 +30,9 @@ def callapi():  # Function to call an API
     # Check the status of the request
     if response.status_code == 200:
         data = response.json()  # Parse the JSON response into a Python dictionary
-        print(data)
-        print(len(data))  # Print the length of the data
         datanew = str(data)  # Convert the data to a string
-        print(len(datanew))  # Print the length of the string data
-        q = 0
-        substrings = []  # List to store substrings separated by commas
-
-        # Loop through the data string and separate it by commas
-        for i in range(len(datanew)):
-            if datanew[i] == ",":
-                print(datanew[q:i])  # Print each substring
-                substrings.append(datanew[q:i])  # Add substring to the list
-                q = i + 1  # Update the starting index for the next substring
-
+        substrings = datanew.split(',')  # Split the string by commas
         # Append the final substring after the last comma
-        print(datanew[q:])
-        substrings.append(datanew[q:])
 
         # Join the substrings with new lines and set the result to a label in the UI
         result_str = "\n".join(substrings)
@@ -58,17 +43,14 @@ def callapi():  # Function to call an API
         print(f"Error: {response.status_code}, {response.text}")
         ui.label.setText(logtxt)
 
-
 def btncallClick():
     # Function to handle the API call when the button is clicked
     callapi()
-
 
 def btnclsClick():
     # Function to clear the label text when the button is clicked
     data = ""
     ui.label.setText(data)
-
 
 def apisetClick():
     try:
