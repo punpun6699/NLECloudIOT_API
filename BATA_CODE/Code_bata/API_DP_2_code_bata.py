@@ -82,7 +82,7 @@ def callapi(excelcom): # Function to call an API and handle Excel operations bas
             # If the necessary data is available, update the Excel file
             if substrings[ValueIndex] != "N/A" or substrings[NameIndex] != "N/A" or substrings[
                 CreateDateIndex] != "N/A":
-                if substrings[NameIndex] == " 'Name': 'gps'":
+                if substrings[ValueIndex][11] == "{":
                     gpsValue = str(substrings[ValueIndex] + "," + substrings[ValueIndex + 1])
                     print('GPS', 'is', gpsValue)
                     new_row = {'CreateDate': substrings[CreateDateIndex], 'Name': substrings[NameIndex],
