@@ -14,7 +14,7 @@ def callapi(excelcom):
         df = pd.read_excel(file_path, engine='openpyxl')
     except FileNotFoundError:
         # หากไฟล์ไม่พบ ให้สร้าง DataFrame ว่าง ๆ
-        df = pd.DataFrame(columns=['Column1', 'Column2'])
+        df = pd.DataFrame(columns=['CreateDate', 'Name','Value'])
 
     urllib3.disable_warnings(urllib3.exceptions.NotOpenSSLWarning)
     urlin = ui.textEdit.document().toPlainText()
@@ -36,35 +36,44 @@ def callapi(excelcom):
         datanew = str(data)
         substrings = datanew.split(',')
 
-
         if excelcom==1:
-            nameindex1 = 0
-            nameindex2 = 0
+            substrings.append("N/A")
+            CreateDateIndex = len(substrings)-1
+            NameIndex = len(substrings)-1
+            ValueIndex = len(substrings)-1
             datalo = []
             for substring in substrings:
                 parts = substring.split("'")
                 if len(parts) > 1:
                     datalo.append(parts[1])
             if "Name" in datalo:
-                nameindex1 = datalo.index("Name")
-                print(datalo[nameindex1], "=", substrings[nameindex1])
+                CreateDateIndex = datalo.index("Name")
             if "Value" in datalo:
-                nameindex2 = datalo.index("Value")
-                print(datalo[nameindex2], "=", substrings[nameindex2])
+                NameIndex = datalo.index("Value")
 
-            # สร้าง DataFrame ใหม่ที่มีข้อมูลใหม่
-            new_row = {'Column1': substrings[nameindex1], 'Column2': substrings[nameindex2]}
-            new_df = pd.DataFrame([new_row])
+            if "CreateDate" in datalo:
+                ValueIndex = datalo.index("CreateDate")
 
-            # รวม DataFrame ใหม่กับ DataFrame ที่มีอยู่
-            df = pd.concat([df, new_df], ignore_index=True)
-
-            # บันทึก DataFrame ที่อัปเดตกลับไปที่ไฟล์ Excel
-            df.to_excel(file_path, index=False, engine='openpyxl')
-            print(f"\033[1;32;40mExcel Update\033[0m")
+            print('CreateDateIndex', 'is',CreateDateIndex, "=", substrings[CreateDateIndex])
+            print('NameIndex', 'is',NameIndex, "=", substrings[NameIndex])
+            print('ValueIndex','is',ValueIndex, "=", substrings[ValueIndex])
+            if substrings[ValueIndex] != "N/A" or substrings[NameIndex] != "N/A" or substrings[CreateDateIndex] != "N/A":
+                # สร้าง DataFrame ใหม่ที่มีข้อมูลใหม่
+                new_row = {'CreateDate': substrings[CreateDateIndex], 'Name': substrings[NameIndex],'Value': substrings[ValueIndex]}
+                new_df = pd.DataFrame([new_row])
+                # รวม DataFrame ใหม่กับ DataFrame ที่มีอยู่
+                df = pd.concat([df, new_df], ignore_index=True)
+                # บันทึก DataFrame ที่อัปเดตกลับไปที่ไฟล์ Excel
+                df.to_excel(file_path, index=False, engine='openpyxl')
+                substrings.pop()
+                substrings.append("Excel Update OK")
+                print(f"\033[1;32;40mExcel Update\033[0m")
+            else:
+                substrings.pop()
+                substrings.append("Excel can't Update")
+                print(f"\033[1;31;40mExcel can't Update\033[0m")
         else:
             print(f"\033[1;31;40mExcel not Update\033[0m")
-
         result_str = "\n".join(substrings)
         ui.label.setText(result_str)
     else:
