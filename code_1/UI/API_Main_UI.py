@@ -43,7 +43,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "NLECloud APL Calling"))
+        Dialog.setWindowTitle(_translate("Dialog", "NLECloud APL Calling BATA"))
         self.label.setText(_translate("Dialog", ""))
         self.pushButton.setText(_translate("Dialog", "call"))
         self.pushButton_2.setText(_translate("Dialog", "cls"))
